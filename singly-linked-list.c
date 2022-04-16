@@ -116,7 +116,7 @@ int freeList(headNode* h){
 	listNode* p = h->first;
 	listNode* prev = NULL;
 
-	while(p != NULL) {
+	while(p != NULL) { // p가 NULL이 아닐 경우
 		prev = p;
 		p = p->link;
 		free(prev); // listNode 메모리 해제
@@ -132,7 +132,7 @@ int insertNode(headNode* h, int key) {
 	node->key = key;
 	node->link = NULL;
 
-	if (h->first == NULL)
+	if (h->first == NULL) // headNode가 NULL일 경우
 	{
 		h->first = node;
 		return 0;
@@ -170,7 +170,7 @@ int insertLast(headNode* h, int key) {
 
 	if (h->first == NULL) // first가 NULL일 경우
 	{
-		h->first = node;
+		h->first = node; // 노드 추가
 		return 0;
 	}
 
@@ -178,7 +178,7 @@ int insertLast(headNode* h, int key) {
 	while(n->link != NULL) { // link가 NULL이 아닐 경우
 		n = n->link;
 	}
-	n->link = node;
+	n->link = node; // 노드 추가
 	return 0;
 }
 
@@ -188,8 +188,8 @@ int insertFirst(headNode* h, int key) {
 	listNode* node = (listNode*)malloc(sizeof(listNode)); // node에 'listNode' type으로 주소 받기
 	node->key = key;
 
-	node->link = h->first;
-	h->first = node;
+	node->link = h->first; // list의 처음 부분
+	h->first = node; // 노드 추가
 
 	return 0;
 }
@@ -199,7 +199,7 @@ int deleteNode(headNode* h, int key) {
 
 	if (h->first == NULL) // first가 NULL일 경우
 	{
-		printf("nothing to delete.\n");
+		printf("nothing to delete.\n"); // 삭제할 내용이 없다고 경고
 		return 0;
 	}
 
@@ -267,6 +267,7 @@ int deleteFirst(headNode* h) {
 	listNode* n = h->first;
 	h->first = n->link;
 	free(n); // 노드 삭제
+
 	return 0;
 }
 
@@ -275,7 +276,7 @@ int invertList(headNode* h) {
 
 
 	if(h->first == NULL) { // first가 NULL일 경우
-		printf("nothing to invert...\n");
+		printf("nothing to invert...\n"); // 역순으로 재배치할 내용이 없다고 경고
 		return 0;
 	}
 
@@ -289,7 +290,8 @@ int invertList(headNode* h) {
 		n = n->link;
 		middle->link = trail;
 	}
-	h->first = middle;
+
+	h->first = middle; // 역순으로 재배치
 	return 0;
 }
 
